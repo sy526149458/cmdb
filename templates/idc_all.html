@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="/static/base.css">
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/blog.css">
+</head>
+<body>
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="/property/admin/">有云服务器资源管理</a>
+                    </li>
+                     <li>
+                        <a href="/property/idc_all_add/">创建主机</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+        <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-8 col-md-9 col-lg-10">
+                <div class="panel panel-default">
+                    <div class="panel-heading">主机列表</div>
+                    <div class="panel-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>序号</th>
+                                    <th>云厂商</th>
+                                    <th>系统</th>
+                                    <th>地区</th>
+                                    <th>ip地址</th>
+                                    <th>运行状态</th>
+                                    <th>配置</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for i in ret_idc_all %}
+                                    <tr>
+                                        <td>{{ forloop.counter }}</td>
+                                        <td><a href="/property/idc_edit/?field={{ 'vendors' }}&idc_id={{ i.id }}">{{ i.vendors }}</a></td>
+                                        <td><a href="/property/idc_edit/?field={{ 'system' }}&idc_id={{ i.id }}">{{ i.system }}</a></td>
+                                        <td><a href="/property/idc_edit/?field={{ 'region' }}&idc_id={{ i.id }}">{{ i.region }}</a></td>
+                                        <td><a href="/property/idc_edit/?field={{ 'ip' }}&idc_id={{ i.id }}">{{ i.ip }}</a></td>
+                                        <td><a href="/property/idc_edit/?field={{ 'status' }}&idc_id={{ i.id }}">{{ i.status }}</a></td>
+                                        <td><a href="/property/idc_edit/?field={{ 'configuration' }}&idc_id={{ i.id }}">{{ i.configuration }}</a></td>
+                                        <td>
+                                            <a href="/property/app_idc_list/?idc_id={{ i.id }}">查看应用</a>
+                                            <a href="/property/idc_edit/?idc_id={{ i.id }}&field={{ 'edit' }}">编辑</a>
+                                            <a href="/property/idc_all_del/?idc_id={{ i.id }}">删除</a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        <div>
+                            <ul class="pagination">
+                                <li>
+                                    {% if page_of_host.has_previous %}
+                                      <a href="?page={{ page_of_host.previous_page_number }}" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                      </a>
+                                    {% else %}
+                                        <span aria-hidden="true">&laquo;</span>
+                                    {% endif %}
+                                </li>
+                                {% for page_num in page_of_host.paginator.page_range %}
+                                    <li><a href="?page={{ page_num }}">{{ page_num }}</a></li>
+                                {% endfor %}
+
+                                <li>
+                                    {% if page_of_host.has_next %}
+                                      <a href="?page={{ page_of_host.next_page_number }}" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                      </a>
+                                    {% else %}
+                                        <span aria-hidden="true">&raquo;</span>
+                                    {% endif %}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% block content %}{% endblock %}
+     <script type="text/javascript" src="/static/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript" src="/static/bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>

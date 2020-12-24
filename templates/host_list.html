@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="/static/base.css">
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/blog.css">
+</head>
+<body>
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="/property/home/">首页</a>
+                    </li>
+                </ul>
+                <button class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+        <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-8 col-md-9 col-lg-10">
+                <div class="panel panel-default">
+                    <div class="panel-heading">{{ env }}环境</div>
+                    <div class="panel-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>序号</th>
+                                    <th>应用</th>
+                                    <th>域名</th>
+                                    <th>IP地址</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for h in hostList %}
+                                    <tr>
+                                        <td>{{ forloop.counter }}</td>
+                                        <td>{{ h.0 }}</td>
+                                        <td>
+                                            {% for domain in h.1 %}
+                                                {{ domain }}
+                                                <p></p>
+                                            {% endfor %}
+                                        </td>
+                                        <td>
+                                            {% for ip in h.2 %}
+                                                {{ ip }}
+                                                <p></p>
+                                            {% endfor %}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+{#                    {% for a in ret_app %}#}
+{#                        <div class="blog">#}
+{#                            <h3><a href="/">{{ a.application }}</a></h3>#}
+{#                        </div>#}
+{#                    {% empty %}#}
+{#                        <div class="blog">#}
+{#                            <h3>暂无博客，敬请期待</h3>#}
+{#                        </div>#}
+{#                    {% endfor %}#}
+                    </div>
+                    <div>
+                        <ul class="pagination">
+                            <li>
+                                {% if page_of_host.has_previous %}
+                                  <a href="?page={{ page_of_host.previous_page_number }}&env_id={{ env_id }}&lanuage_id={{ lanuage_id }}" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                  </a>
+                                {% else %}
+                                    <span aria-hidden="true">&laquo;</span>
+                                {% endif %}
+                            </li>
+                            {% for page_num in page_of_host.paginator.page_range %}
+                                <li><a href="?page={{ page_num }}&env_id={{ env_id }}&lanuage_id={{ lanuage_id }}">{{ page_num }}</a></li>
+                            {% endfor %}
+
+                            <li>
+                                {% if page_of_host.has_next %}
+                                  <a href="?page={{ page_of_host.next_page_number }}&env_id={{ env_id }}&lanuage_id={{ lanuage_id }}" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                  </a>
+                                {% else %}
+                                    <span aria-hidden="true">&raquo;</span>
+                                {% endif %}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="hidden-xs col-sm-4 col-md-3 col-lg-2">
+                <div class="panel panel-default">
+                    <div class="panel-heading">语言分类</div>
+                    <div class="panel-body">
+                        <ul class="blog-types" >
+                            <li><a href="/property/env_list/?id=1" >.NET</a></li>
+                            <li><a href="/property/env_list/?id=2" >JAVA</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% block content %}{% endblock %}
+     <script type="text/javascript" src="/static/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript" src="/static/bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>

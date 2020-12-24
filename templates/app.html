@@ -1,0 +1,109 @@
+{#<!DOCTYPE html>#}
+{#<html lang="zh-CN">#}
+{#<head>#}
+{#    <meta http-equiv="content-Type" charset="UTF-8">#}
+{#    <meta http-equiv="x-ua-compatible" content="IE=edge">#}
+{#    <meta name="viewport" content="width=device-width, initial-scale=1">#}
+{#    <title>应用列表页面</title>#}
+{#</head>#}
+{#<body>#}
+{##}
+{#<h1>应用列表</h1>#}
+{#<a href="/property/app_add/?id={{ env_id }}&lanuage_id={{ lanuage_id }}">添加应用</a>#}
+{#<a href="/property/env/?id={{ lanuage_id }}">返回</a>#}
+{##}
+{#<table border="1">#}
+{#    <thead>#}
+{#    <tr>#}
+{#        <th>序号</th>#}
+{#        <th>应用</th>#}
+{#        <th>操作</th>#}
+{#    </tr>#}
+{#    </thead>#}
+{#    <tbody>#}
+{#    {% for i in ret_app %}#}
+{#        <tr>#}
+{#            <td>{{ forloop.counter }}</td>#}
+{#            <td>{{ i.application }}</td>#}
+{#            <td>#}
+{#                <a href="/property/domain/?id={{ i.id }}&env_id={{ i.env_id }}&lanuage_id={{ lanuage_id }}">查看域名</a>#}
+{#                <a href="/property/idc/?id={{ i.id }}&env_id={{ i.env_id }}&lanuage_id={{ lanuage_id }}">查看主机</a>#}
+{#                <a href="/property/app_del/?id={{ i.id }}&lanuage_id={{ lanuage_id }}">删除</a>#}
+{#            </td>#}
+{#        </tr>#}
+{#    {% endfor %}#}
+{#    </tbody>#}
+{#</table>#}
+{##}
+{#</body>#}
+{#</html>#}
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="/static/base.css">
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/blog.css">
+</head>
+<body>
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="/property/admin/">有云服务器资源管理</a>
+                    </li>
+                     <li>
+                        <a href="/property/app_add/?env_id={{ env_id }}&lanuage_id={{ lanuage_id }}">添加应用</a>
+                    </li>
+                    <li>
+                        <a href="/property/env/?lanuage_id={{ lanuage_id }}">返回</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+        <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-8 col-md-9 col-lg-10">
+                <div class="panel panel-default">
+                    <div class="panel-heading">应用列表</div>
+                    <div class="panel-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>序号</th>
+                                    <th>应用</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for a in ret_app %}
+                                    <tr>
+                                        <td>{{ forloop.counter }}</td>
+                                        <td>{{ a.application }}</td>
+                                        <td>
+                                            <a href="/property/domain/?application_id={{ a.id }}&env_id={{ a.env_id }}&lanuage_id={{ lanuage_id }}">查看域名</a>
+                                            <a href="/property/idc/?application_id={{ a.id }}&env_id={{ a.env_id }}&lanuage_id={{ lanuage_id }}">查看主机</a>
+                                            <a href="/property/app_edit/?application_id={{ a.id }}&lanuage_id={{ lanuage_id }}&env_id={{ env_id }}">编辑</a>
+                                            <a href="/property/app_del/?application_id={{ a.id }}&lanuage_id={{ lanuage_id }}">删除</a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% block content %}{% endblock %}
+     <script type="text/javascript" src="/static/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript" src="/static/bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta http-equiv="content-Type" charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>主机</title>
+</head>
+<body>
+
+<form action="/property/idc_edit/?lanuage_id={{ lanuage_id }}&env_id={{ env_id }}&application_id={{ application_id }}&idc_id={{ idc_id }}&field={{ field }}" method="post">
+    {% if field == 'vendors' %}
+        云厂商:<input type="text" name="vendors">
+    {% elif field == 'system' %}
+        系统:<input type="text" name="system">
+    {% elif field == 'region' %}
+        地区:<input type="text" name="region">
+    {% elif field == 'ip' %}
+        ip地址:<input type="text" name="ip">
+    {% elif field == 'status' %}
+        运行状态:<input type="text" name="status">
+    {% elif field == 'configuration' %}
+        配置:<input type="text" name="configuration">
+    {% elif field == 'edit' %}
+        云厂商:<input type="text" name="vendors">
+        系统:<input type="text" name="system">
+        地区:<input type="text" name="region">
+        ip地址:<input type="text" name="ip">
+        运行状态:<input type="text" name="status">
+        配置:<input type="text" name="configuration">
+    {% endif %}
+    <input type="submit">
+</form>
+
+
+</body>
+</html>
