@@ -15,10 +15,10 @@
             <div class="navbar-header">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="/property/admin/">有云服务器资源管理</a>
+                        <a href="/admin/">有云服务器资源管理</a>
                     </li>
                      <li>
-                        <a href="/property/idc_all_add/">创建主机</a>
+                        <a href="/idc_all_add/">创建主机</a>
                     </li>
                 </ul>
             </div>
@@ -47,16 +47,16 @@
                                 {% for i in ret_idc_all %}
                                     <tr>
                                         <td>{{ forloop.counter }}</td>
-                                        <td><a href="/property/idc_edit/?field={{ 'vendors' }}&idc_id={{ i.id }}">{{ i.vendors }}</a></td>
-                                        <td><a href="/property/idc_edit/?field={{ 'system' }}&idc_id={{ i.id }}">{{ i.system }}</a></td>
-                                        <td><a href="/property/idc_edit/?field={{ 'region' }}&idc_id={{ i.id }}">{{ i.region }}</a></td>
-                                        <td><a href="/property/idc_edit/?field={{ 'ip' }}&idc_id={{ i.id }}">{{ i.ip }}</a></td>
-                                        <td><a href="/property/idc_edit/?field={{ 'status' }}&idc_id={{ i.id }}">{{ i.status }}</a></td>
-                                        <td><a href="/property/idc_edit/?field={{ 'configuration' }}&idc_id={{ i.id }}">{{ i.configuration }}</a></td>
+                                        <td><a href="/idc_edit/?field={{ 'vendors' }}&idc_id={{ i.id }}">{{ i.vendors }}</a></td>
+                                        <td><a href="/idc_edit/?field={{ 'system' }}&idc_id={{ i.id }}">{{ i.system }}</a></td>
+                                        <td><a href="/idc_edit/?field={{ 'region' }}&idc_id={{ i.id }}">{{ i.region }}</a></td>
+                                        <td><a href="/idc_edit/?field={{ 'ip' }}&idc_id={{ i.id }}">{{ i.ip }}</a></td>
+                                        <td><a href="/idc_edit/?field={{ 'status' }}&idc_id={{ i.id }}">{{ i.status }}</a></td>
+                                        <td><a href="/idc_edit/?field={{ 'configuration' }}&idc_id={{ i.id }}">{{ i.configuration }}</a></td>
                                         <td>
-                                            <a href="/property/app_idc_list/?idc_id={{ i.id }}">查看应用</a>
-                                            <a href="/property/idc_edit/?idc_id={{ i.id }}&field={{ 'edit' }}">编辑</a>
-                                            <a href="/property/idc_all_del/?idc_id={{ i.id }}">删除</a>
+                                            <a href="/app_idc_list/?idc_id={{ i.id }}">查看应用</a>
+                                            <a href="/idc_edit/?idc_id={{ i.id }}&field={{ 'edit' }}">编辑</a>
+                                            <a href="/idc_all_del/?idc_id={{ i.id }}">删除</a>
                                         </td>
                                     </tr>
                                 {% endfor %}

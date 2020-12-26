@@ -45,5 +45,5 @@ urlpatterns = [
     url(r'^idc_all_add/', views.idc_all_add),
     url(r'^idc_all_del/', views.idc_all_del),
     url(r'^host_list/', views.host_list),
-    url(r'^home/', views.home),
+    url(r'', views.home),
 ]

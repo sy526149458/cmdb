@@ -1,51 +1,3 @@
-{#<!DOCTYPE html>#}
-{#<html lang="zh-CN">#}
-{#<head>#}
-{#    <meta http-equiv="content-Type" charset="UTF-8">#}
-{#    <meta http-equiv="x-ua-compatible" content="IE=edge">#}
-{#    <meta name="viewport" content="width=device-width, initial-scale=1">#}
-{#    <title>主机列表</title>#}
-{#</head>#}
-{#<body>#}
-{##}
-{#<h1>主机列表</h1>#}
-{#<a href="/property/idc_add/?id={{ application_id }}&env_id={{ env_id }}&lanuage_id={{ lanuage_id }}">添加主机</a>#}
-{#<a href="/property/app/?id={{ env_id }}&lanuage_id={{ lanuage_id }}">返回</a>#}
-{#<a href="/project_add/">添加项目</a>#}
-{##}
-{#<table border="1">#}
-{#    <thead>#}
-{#    <tr>#}
-{#        <th>序号</th>#}
-{#        <th>云场商</th>#}
-{#        <th>系统</th>#}
-{#        <th>地区</th>#}
-{#        <th>ip地址</th>#}
-{#        <th>运行状态</th>#}
-{#        <th>配置</th>#}
-{#        <th>操作</th>#}
-{#    </tr>#}
-{#    </thead>#}
-{#    <tbody>#}
-{#    {% for i in ret %}#}
-{#        <tr>#}
-{#            <td>{{ forloop.counter }}</td>#}
-{#            <td>{{ i.vendors }}</td>#}
-{#            <td>{{ i.system }}</td>#}
-{#            <td>{{ i.region }}</td>#}
-{#            <td>{{ i.ip }}</td>#}
-{#            <td>{{ i.status }}</td>#}
-{#            <td>{{ i.configuration }}</td>#}
-{#            <td>#}
-{#                <a href="/property/idc_del/?id={{ i.id }}&application_id={{ application_id }}&env_id={{ env_id }}&lanuage_id={{ lanuage_id }}">删除</a>#}
-{#            </td>#}
-{#        </tr>#}
-{#    {% endfor %}#}
-{#    </tbody>#}
-{#</table>#}
-{##}
-{#</body>#}
-{#</html>#}
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -63,13 +15,13 @@
             <div class="navbar-header">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="/property/admin/">有云服务器资源管理</a>
+                        <a href="/admin/">有云服务器资源管理</a>
                     </li>
                      <li>
-                        <a href="/property/idc_add/?application_id={{ application_id }}&env_id={{ env_id }}&lanuage_id={{ lanuage_id }}">添加主机</a>
+                        <a href="/idc_add/?application_id={{ application_id }}&env_id={{ env_id }}&lanuage_id={{ lanuage_id }}">添加主机</a>
                     </li>
                     <li>
-                        <a href="/property/app/?env_id={{ env_id }}&lanuage_id={{ lanuage_id }}">返回</a>
+                        <a href="/app/?env_id={{ env_id }}&lanuage_id={{ lanuage_id }}">返回</a>
                     </li>
                 </ul>
             </div>
@@ -105,7 +57,7 @@
                                         <td>{{ i.status }}</td>
                                         <td>{{ i.configuration }}</td>
                                         <td>
-                                            <a href="/property/idc_del/?idc_id={{ i.id }}&application_id={{ application_id }}&env_id={{ env_id }}&lanuage_id={{ lanuage_id }}">删除</a>
+                                            <a href="/idc_del/?idc_id={{ i.id }}&application_id={{ application_id }}&env_id={{ env_id }}&lanuage_id={{ lanuage_id }}">删除</a>
                                         </td>
                                     </tr>
                                 {% endfor %}
