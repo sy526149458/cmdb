@@ -18,7 +18,7 @@ from django.conf.urls import url, include
 from property_app import views
 
 urlpatterns = [
-    url(r'^admin/', views.admin),
+    url(r'^cmdb_admin/', views.admin),
     url(r'^language_add/', views.language_add),
     url(r'^language_del/', views.language_del),
     url(r'^env/', views.env),
