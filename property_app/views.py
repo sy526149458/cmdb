@@ -12,7 +12,7 @@ def language_add(request):
     if request.method == 'POST':
         lanuage = request.POST.get('lanuage')
         LANUAGE.objects.create(lanuage=lanuage)
-        return redirect('/property/language/')
+        return redirect('/language/')
     return render(request, 'language_add.html')
 
 
@@ -76,7 +76,7 @@ def env_add(request):
     if request.method == 'POST':
         env = request.POST.get('env')
         ENV.objects.create(env=env, lanuage_id=lanuage_id)
-        return redirect('/property/env/?lanuage_id=%s' % lanuage_id)
+        return redirect('/env/?lanuage_id=%s' % lanuage_id)
     return render(request, 'env_add.html', {'lanuage_id': lanuage_id})
 
 
@@ -88,7 +88,7 @@ def env_edit(request):
         obj = ENV.objects.get(id=env_id)
         obj.env = env
         obj.save()
-        return redirect('/property/env/?lanuage_id=%s&env_id=%s' % (lanuage_id, env_id))
+        return redirect('/env/?lanuage_id=%s&env_id=%s' % (lanuage_id, env_id))
     return render(request, 'env_edit.html', {'lanuage_id': lanuage_id, 'env_id': env_id})
 
 
@@ -96,7 +96,7 @@ def env_del(request):
     del_id = request.GET.get('env_id')
     lanuage_id = ENV.objects.get(id=del_id).lanuage_id
     ENV.objects.filter(id=del_id).delete()
-    return redirect('/property/env/?lanuage_id=%s' % lanuage_id)
+    return redirect('/env/?lanuage_id=%s' % lanuage_id)
 
 
 def app(request):
@@ -119,7 +119,7 @@ def app_add(request):
         print('app_add_lanuage_id:%s' % lanuage_id)
         app = request.POST.get('app')
         APPLICATION.objects.create(application=app, env_id=env_id)
-        return redirect('/property/app/?env_id=%s&lanuage_id=%s' % (env_id, lanuage_id))
+        return redirect('/app/?env_id=%s&lanuage_id=%s' % (env_id, lanuage_id))
     return render(request, 'app_add.html', {'env_id': env_id, 'lanuage_id': lanuage_id})
 
 
@@ -130,7 +130,7 @@ def app_idc_add(request):
         app_id = APPLICATION.objects.get(application=app).id
         obj = IDC.objects.get(id=idc_id)
         obj.APPLICATION.add(app_id)
-        return redirect('/property/app_idc_list/?idc_id=%s' % idc_id)
+        return redirect('/app_idc_list/?idc_id=%s' % idc_id)
     return render(request, 'app_idc_add.html', {'idc_id': idc_id})
 
 
@@ -153,7 +153,7 @@ def app_idc_del(request):
     idc_id = request.GET.get('idc_id')
     obj = IDC.objects.get(id=idc_id)
     obj.APPLICATION.remove(del_id)
-    return redirect('/property/app_idc_list/?idc_id=%s' % idc_id)
+    return redirect('/app_idc_list/?idc_id=%s' % idc_id)
 
 
 def app_edit(request):
@@ -165,7 +165,7 @@ def app_edit(request):
         obj = APPLICATION.objects.get(id=application_id)
         obj.application = app
         obj.save()
-        return redirect('/property/app/?lanuage_id=%s&env_id=%s' % (lanuage_id, env_id))
+        return redirect('/app/?lanuage_id=%s&env_id=%s' % (lanuage_id, env_id))
     return render(request, 'app_edit.html', {'lanuage_id': lanuage_id, 'env_id': env_id, 'application_id': application_id})
 
 
@@ -174,7 +174,7 @@ def app_del(request):
     lanuage_id = request.GET.get('lanuage_id')
     env_id = APPLICATION.objects.get(id=del_id).env_id
     APPLICATION.objects.filter(id=del_id).delete()
-    return redirect('/property/app/?env_id=%s&lanuage_id=%s' % (env_id, lanuage_id))
+    return redirect('/app/?env_id=%s&lanuage_id=%s' % (env_id, lanuage_id))
 
 
 def domain(request):
@@ -198,7 +198,7 @@ def domain_add(request):
     if request.method == 'POST':
         domain = request.POST.get('domain')
         DOMAIN.objects.create(domain=domain, application_id=application_id)
-        return redirect('/property/domain/?application_id=%s&env_id=%s&lanuage_id=%s' % (application_id, env_id, lanuage_id))
+        return redirect('/domain/?application_id=%s&env_id=%s&lanuage_id=%s' % (application_id, env_id, lanuage_id))
     return render(request, 'domain_add.html', {'application_id': application_id, 'env_id': env_id, 'lanuage_id': lanuage_id})
 
 
@@ -212,7 +212,7 @@ def domain_edit(request):
         obj = DOMAIN.objects.get(id=domain_id)
         obj.domain = domain
         obj.save()
-        return redirect('/property/domain/?lanuage_id=%s&env_id=%s&application_id=%s' % (lanuage_id, env_id, application_id))
+        return redirect('/domain/?lanuage_id=%s&env_id=%s&application_id=%s' % (lanuage_id, env_id, application_id))
     return render(request, 'domain_edit.html', {'lanuage_id': lanuage_id, 'env_id': env_id, 'application_id': application_id, 'domain_id': domain_id})
 
 
@@ -222,7 +222,7 @@ def domain_del(request):
     lanuage_id = request.GET.get('lanuage_id')
     application_id = DOMAIN.objects.get(id=del_id).application_id
     DOMAIN.objects.filter(id=del_id).delete()
-    return redirect('/property/domain/?application_id=%s&env_id=%s&lanuage_id=%s' % (application_id, env_id, lanuage_id))
+    return redirect('/domain/?application_id=%s&env_id=%s&lanuage_id=%s' % (application_id, env_id, lanuage_id))
 
 
 def idc(request):
@@ -244,7 +244,7 @@ def idc_add(request):
         print(idc_id)
         obj = APPLICATION.objects.get(id=application_id)
         obj.idc.add(idc_id)
-        return redirect('/property/idc/?application_id=%s&env_id=%s&lanuage_id=%s' % (application_id, env_id, lanuage_id))
+        return redirect('/idc/?application_id=%s&env_id=%s&lanuage_id=%s' % (application_id, env_id, lanuage_id))
     return render(request, 'idc_add.html', {'application_id': application_id, 'env_id': env_id, 'lanuage_id': lanuage_id})
 
 
@@ -285,7 +285,7 @@ def idc_edit(request):
             configuration = request.POST.get('configuration')
             obj.configuration = configuration
         obj.save()
-        return redirect('/property/idc_all/')
+        return redirect('/idc_all/')
     return render(request, 'idc_edit.html', {'idc_id': idc_id, 'field': field})
 
 
@@ -296,7 +296,7 @@ def idc_del(request):
     application_id = request.GET.get('application_id')
     obj = APPLICATION.objects.get(id=application_id)
     obj.idc.remove(del_id)
-    return redirect('/property/idc/?application_id=%s&env_id=%s&lanuage_id=%s' % (application_id, env_id, lanuage_id))
+    return redirect('/idc/?application_id=%s&env_id=%s&lanuage_id=%s' % (application_id, env_id, lanuage_id))
 
 
 def idc_all(request):
@@ -319,14 +319,14 @@ def idc_all_add(request):
         status = request.POST.get('status')
         configuration = request.POST.get('configuration')
         IDC.objects.create(vendors=vendors, system=system, region=region, ip=ip, status=status, configuration=configuration)
-        return redirect('/property/idc_all/')
+        return redirect('/idc_all/')
     return render(request, 'idc_all_add.html')
 
 
 def idc_all_del(request):
     del_id = request.GET.get('idc_id')
     IDC.objects.filter(id=del_id).delete()
-    return redirect('/property/idc_all/')
+    return redirect('/idc_all/')
 
 
 def host_list(request):
