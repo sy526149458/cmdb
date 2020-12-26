@@ -3,7 +3,7 @@ from property_app.models import ENV, APPLICATION, DOMAIN, LANUAGE, IDC
 from django.core.paginator import Paginator
 
 
-def admin(request):
+def cmdb_admin(request):
     ret_lanuage = LANUAGE.objects.all().order_by('id')
     return render(request, 'admin.html', {'ret_lanuage': ret_lanuage})
 
